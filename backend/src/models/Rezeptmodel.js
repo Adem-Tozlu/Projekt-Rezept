@@ -13,10 +13,6 @@ const rezeptSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    zeit: {
-        type: Number,
-        required: true
-    },
     date: {
         type: Date,
         default: Date.now,

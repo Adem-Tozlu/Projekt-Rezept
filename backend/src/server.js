@@ -1,10 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
-//import rezeptRoutes from './routes/rezeptRoutes.js';
+import "dotenv/config";
+import rezeptRoutes from './routes/rezeptRoutes.js';
 
-dotenv.config();
 const server = express();
 server.use(cors());
 server.use(express.json());
@@ -23,7 +22,7 @@ const mongoDB = process.env.MONGODB_URL;
     }   
 })();
 
-//server.use('/api/rezepte', rezeptRoutes);
+server.use('/api/rezepte', rezeptRoutes);
 
 server.listen(PORT, () => {
     console.log(`Server läuft auf Port ${PORT}`);
