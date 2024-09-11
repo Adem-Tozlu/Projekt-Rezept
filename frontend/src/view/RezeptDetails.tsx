@@ -5,16 +5,13 @@ interface Rezept {
   title: string;
   zutaten: string;
   zubereitung: string;
-  date: string;
 }
 
 function RezeptDetails() {
   const [rezept, setRezept] = useState<Rezept | null>(null);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
   //const url = import.meta.env.PORT;
-
   const url = "http://localhost:5000";
 
   useEffect(() => {
@@ -37,20 +34,22 @@ function RezeptDetails() {
       navigate("/");
     }
   };
-  if (!rezept) return <div>Loading...</div>;
+
+
 
   return (
     <div className="container">
-      <h1>{rezept?.title}</h1>
-      <p>{rezept?.zutaten}</p>
-      <p>{rezept?.zubereitung}</p>
+      <h1>Titel: {rezept?.title}</h1>
+      <p>Zutaten: {rezept?.zutaten}</p>
+      <p>Zubereitung: {rezept?.zubereitung}</p>
 
       <p>
-        <em>{new Date(rezept?.date).toLocaleDateString()}</em>
+        <em>Datum: {new Date().toLocaleDateString()}</em>
       </p>
       <button onClick={handleDelete} style={{ background: "red" }}>
         Lösche das Rezept
       </button>
+     
     </div>
   );
 }

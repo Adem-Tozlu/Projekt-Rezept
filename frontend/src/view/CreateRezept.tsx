@@ -1,42 +1,39 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+
 
 function CreateRezept() {
   const [title, setTitel] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
-
   const navigate = useNavigate();
-
   //const url = import.meta.env.PORT;
 
   const url = "http://localhost:5000";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-console.log(title, zutaten, zubereitung);
-
- const formData = new FormData();
- formData.append("title", title);
-  formData.append("zutaten", zutaten);
-  formData.append("zubereitung", zubereitung);
-  try {
-    const response = await axios.post(`${url}/api/rezepte`, formData,{
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-
-    });
-    console.log(response.data);
-    navigate("/");
-    
-  } catch (error) {
-    console.error(error);
-    
-  }
-
-    
+    const zutatenArray = zutaten.split(",").map(item => item.trim());
+  
+    const newRezept = {
+      title,
+      zutaten: zutatenArray,
+      zubereitung,
+    };
+  
+    try {
+      const response = await fetch(`${url}/api/rezepte`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newRezept),
+      });
+      await response.json();
+      navigate("/");
+    } catch (error) {
+      console.error("Error creating recipe:", error);
+    }
   };
 
   return (
