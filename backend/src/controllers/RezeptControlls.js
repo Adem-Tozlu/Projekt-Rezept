@@ -15,14 +15,17 @@ export const createRezept = async (req, res) => {
         title: req.body.title,
         zutaten: req.body.zutaten,
         zubereitung: req.body.zubereitung,
-        date: req.body.date
+       
     };
     const newItem = new Rezept(item);
     try {
         const newRezept = await newItem.save();
         res.status(201).json(newRezept);
     } catch (error) {
-        res.status(409).json({ message: error.message });
+        console.log(error);
+        
+        res.status(500).json({ message: error.message });
+        
     }
 
 }

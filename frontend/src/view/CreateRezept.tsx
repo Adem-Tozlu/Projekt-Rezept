@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function CreateRezept() {
-  const [titel, setTitel] = useState<string>("");
+  const [title, setTitel] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
 
@@ -14,18 +15,28 @@ function CreateRezept() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+console.log(title, zutaten, zubereitung);
 
-    const newRezept = { titel, zutaten, zubereitung };
-
-    await fetch(`${url}/api/rezepte`, {
-      method: "POST",
+ const formData = new FormData();
+ formData.append("title", title);
+  formData.append("zutaten", zutaten);
+  formData.append("zubereitung", zubereitung);
+  try {
+    const response = await axios.post(`${url}/api/rezepte`, formData,{
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
-      body: JSON.stringify(newRezept),
-    });
 
+    });
+    console.log(response.data);
     navigate("/");
+    
+  } catch (error) {
+    console.error(error);
+    
+  }
+
+    
   };
 
   return (
@@ -36,7 +47,7 @@ function CreateRezept() {
           <label>Titel: </label>
           <input
             type="text"
-            value={titel}
+            value={title}
             onChange={(e) => setTitel(e.target.value)}
           />
         </div>
