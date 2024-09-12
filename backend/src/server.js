@@ -12,14 +12,14 @@ const PORT = process.env.PORT || 5000;
 const mongoDB = process.env.MONGODB_URL;
 
 (async () => {
-    try{
-        await mongoose.connect(`${mongoDB}`);
-        console.log('Die Verbindung wurde hergestellt');
+    try {
+        await mongoose.connect(mongoDB, {
           
+        });
+        console.log('Die Verbindung wurde hergestellt');
     } catch (error) {
-        console.log('Die Verbindung konnte nicht hergestellt werden');
-       
-    }   
+        console.error('Die Verbindung konnte nicht hergestellt werden:', error);
+    }
 })();
 
 server.use('/api/rezepte', rezeptRoutes);

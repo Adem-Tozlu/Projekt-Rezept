@@ -15,7 +15,6 @@ export const createRezept = async (req, res) => {
         title: req.body.title,
         zutaten: req.body.zutaten,
         zubereitung: req.body.zubereitung,
-       
     };
     const newItem = new Rezept(item);
     try {
@@ -23,11 +22,8 @@ export const createRezept = async (req, res) => {
         res.status(201).json(newRezept);
     } catch (error) {
         console.log(error);
-        
         res.status(500).json({ message: error.message });
-        
     }
-
 }
 
 export const getRezeptById = async (req, res) => {
@@ -45,6 +41,18 @@ export const deleteRezept = async (req, res) => {
     try {
         await Rezept.findByIdAndDelete(id);
         res.json({ message: 'Item deleted successfully' });
+    }
+    catch (error) {
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const updateRezept = async (req, res) => {
+    const { id } = req.params;
+    const { title, zutaten, zubereitung } = req.body;
+    try {
+        const updatedRezept = await Rezept.findByIdAndUpdate(id, { title, zutaten, zubereitung }, { new: true });
+        res.json(updatedRezept);
     }
     catch (error) {
         res.status(404).json({ message: error.message });
