@@ -7,7 +7,7 @@ function CreateRezept() {
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
   const navigate = useNavigate();
-  //const url = import.meta.env.PORT;
+ // const url = import.meta.env.PORT;
 
   const url = "http://localhost:5000";
 
@@ -51,16 +51,16 @@ function CreateRezept() {
 
         <div>
           <label>Zutaten: </label>
-          <input
-            type="text"
+          <textarea
+           
             value={zutaten}
             onChange={(e) => setZutaten(e.target.value)}
           />
         </div>
         <div>
           <label>Zubereitung</label>
-          <input
-            type="text"
+          <textarea
+       
             value={zubereitung}
             onChange={(e) => setZubereitung(e.target.value)}
           />

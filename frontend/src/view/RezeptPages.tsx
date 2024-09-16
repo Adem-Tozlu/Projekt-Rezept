@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 interface Rezept {
   _id: string;
   title: string;
-  anweisung: string;
+  zubereitung: string;
 }
 
 //const url = import.meta.env.PORT;
@@ -35,7 +35,7 @@ function RezeptPages() {
           rezepte.map((rezept) => (
             <li key={rezept._id}>
             <h2>{rezept.title}</h2>
-            <p>{rezept.anweisung && rezept.anweisung.substring(0, 100)}...</p>
+            <p>{rezept.zubereitung && rezept.zubereitung.substring(0, 100)}...</p>
             <Link to={`/rezept/${rezept._id}`}>Read more</Link>
           </li>
           ))}

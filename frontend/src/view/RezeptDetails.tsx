@@ -68,7 +68,7 @@ function RezeptDetails() {
   return (
     <div className="container">
       <h1>Titel: {rezept?.title}</h1>
-      <p>Zutaten: {rezept?.zutaten.join(", ")}</p>
+      <p>Zutaten: {rezept?.zutaten}</p>
       <p>Zubereitung: {rezept?.zubereitung}</p>
 
       <p>
@@ -89,16 +89,16 @@ function RezeptDetails() {
         </div>
         <div>
           <label>Zutaten: </label>
-          <input
-            type="text"
+          <textarea
+            
             value={zutaten}
             onChange={(e) => setZutaten(e.target.value)}
           />
         </div>
         <div>
           <label>Zubereitung: </label>
-          <input
-            type="text"
+          <textarea
+            
             value={zubereitung}
             onChange={(e) => setZubereitung(e.target.value)}
           />
