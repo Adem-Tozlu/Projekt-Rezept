@@ -22,7 +22,7 @@ function Layout() {
                   <NavLink className="nav-link" to="/create">Neues Rezept</NavLink>
                 </li>
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/meine-rezepte">Meine Rezepte</NavLink>
+                  <NavLink className="nav-link" to="/myrezept">Meine Rezepte</NavLink>
                 </li>
                 <li className="nav-item dropdown">
                   <NavLink className="nav-link dropdown-toggle " to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

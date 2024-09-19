@@ -1,13 +1,19 @@
+
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+
+
+
+
 
 
 function CreateRezept() {
+ 
   const [title, setTitel] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
   const navigate = useNavigate();
- // const url = import.meta.env.PORT;
+//const url = import.meta.env.PORT;
 
   const url = "http://localhost:5000";
 
@@ -35,6 +41,7 @@ function CreateRezept() {
       console.error("Error creating recipe:", error);
     }
   };
+  
 
   return (
     <div className="container">

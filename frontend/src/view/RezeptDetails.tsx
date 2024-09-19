@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react";
+import {useEffect,useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+
 
 interface Rezept {
   title: string;
@@ -8,7 +10,8 @@ interface Rezept {
 }
 
 function RezeptDetails() {
-  const [rezept, setRezept] = useState<Rezept | null>(null);
+
+   const [rezept, setRezept] = useState<Rezept | null>(null);
   const [title, setTitle] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
