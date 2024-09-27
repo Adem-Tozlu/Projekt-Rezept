@@ -7,6 +7,7 @@ interface Rezept {
   title: string;
   zutaten: string;
   zubereitung: string;
+  imagePath?: string;
 }
 
 function RezeptDetails() {
@@ -15,6 +16,8 @@ function RezeptDetails() {
   const [title, setTitle] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
+
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const url = "http://localhost:5000";
@@ -28,6 +31,7 @@ function RezeptDetails() {
         setTitle(data.title);
         setZutaten(data.zutaten.join(", "));
         setZubereitung(data.zubereitung);
+        
       } catch (error) {
         console.error("Error:", error);
       }
@@ -45,21 +49,20 @@ function RezeptDetails() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const zutatenArray = zutaten.split(",").map(item => item.trim());
+    const zutatenArray = zutaten.split(",").map(item => item.trim()).join(" \n");
   
-    const editRezept = {
-      title,
-      zutaten: zutatenArray,
-      zubereitung,
-    };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("zutaten", JSON.stringify(zutatenArray));
+    formData.append("zubereitung", zubereitung);
+    if (image) {
+      formData.append("image", image);
+    }
   
     try {
       const response = await fetch(`${url}/api/rezepte/${id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(editRezept),
+        body: formData,
       });
       await response.json();
       navigate("/");
@@ -70,8 +73,12 @@ function RezeptDetails() {
 
   return (
     <div className="container">
+      {rezept?.imagePath && (
+        <img src={`http://localhost:5000/${rezept.imagePath}`} alt={rezept.title} style={{ maxWidth: "100%" }} />
+      )}
       <h1>Titel: {rezept?.title}</h1>
-      <p>Zutaten: {rezept?.zutaten}</p>
+      <p className="">Zutaten:<pre>{rezept?.zutaten}</pre></p>
+      
       <p>Zubereitung: {rezept?.zubereitung}</p>
 
       <p>
@@ -89,6 +96,11 @@ function RezeptDetails() {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
+          <label>Bild ändern</label>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}/>
         </div>
         <div>
           <label>Zutaten: </label>

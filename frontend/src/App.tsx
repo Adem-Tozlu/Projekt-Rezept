@@ -13,6 +13,7 @@ function App() {
     <div>
      
       <Routes>
+      
         <Route path="/" element={<Layout/>}>
         <Route index element={<HomePages />} />
         <Route path="/create" element={<CreateRezept />} />

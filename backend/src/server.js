@@ -4,12 +4,16 @@ import mongoose from 'mongoose';
 import "dotenv/config";
 import rezeptRoutes from './routes/rezeptRoutes.js';
 
+
 const server = express();
 server.use(cors());
 server.use(express.json());
+server.use('/uploads', express.static('uploads'));
 
 const PORT = process.env.PORT || 5000;
 const mongoDB = process.env.MONGODB_URL;
+
+
 
 (async () => {
     try {

@@ -187,6 +187,8 @@ function HomePages() {
 
         <div></div>
 
+        {/*Schnelle Rezepte Kategorie*/}
+
         <section className="container schnelle_rezepte mt-5 border-top">
           <h5 className="mt-5 mb-3">Schnelle Rezepte</h5>
           <div className=" row row-cols-1 row-cols-md-3 card-mobile">
@@ -269,6 +271,7 @@ function HomePages() {
               </div>
             </div>
           </div>
+
           {/* Rezept des Monats */}
 
           <div className="border-top mt-5"></div>
@@ -474,7 +477,9 @@ function HomePages() {
             </div>
           </div>
           <div className="border-top mt-5"></div>
+
           {/* Suppen-Rezepte */}
+          
           <h5 className="mt-5 mb-3">Suppen-Rezepte</h5>
           <div className=" row row-cols-1 row-cols-md-3 card-mobile">
             <div className="col">

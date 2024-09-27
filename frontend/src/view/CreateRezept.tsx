@@ -12,6 +12,8 @@ function CreateRezept() {
   const [title, setTitel] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
+  const [image, setImage] = useState<File | null>(null);
+
   const navigate = useNavigate();
 //const url = import.meta.env.PORT;
 
@@ -19,21 +21,22 @@ function CreateRezept() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const zutatenArray = zutaten.split(",").map(item => item.trim());
+    const zutatenArray = zutaten.split(",").map(item => item.trim()).join("\n");
   
-    const newRezept = {
-      title,
-      zutaten: zutatenArray,
-      zubereitung,
-    };
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("zutaten", zutatenArray);
+    formData.append("zubereitung", zubereitung);
+    if (image) {
+      formData.append("image", image);
+    }
   
     try {
       const response = await fetch(`${url}/api/rezepte`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newRezept),
+       
+        body: formData,
       });
       await response.json();
       navigate("/");
@@ -45,11 +48,20 @@ function CreateRezept() {
 
   return (
     <div className="container">
-      <h1>Create new Rezept</h1>
+      <h1>Erstelle dein Rezept</h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Titel: </label>
+
+        <label>Dein Rezeptbild:</label>
           <input
+            className="form-control"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}
+          />
+
+          <label>Titel: </label>
+          <input className="form-control"
             type="text"
             value={title}
             onChange={(e) => setTitel(e.target.value)}
@@ -57,8 +69,8 @@ function CreateRezept() {
         </div>
 
         <div>
-          <label>Zutaten: </label>
-          <textarea
+          <label >Zutaten: </label>
+          <textarea className="form-control"
            
             value={zutaten}
             onChange={(e) => setZutaten(e.target.value)}
@@ -66,13 +78,15 @@ function CreateRezept() {
         </div>
         <div>
           <label>Zubereitung</label>
-          <textarea
+          <textarea className="form-control"
        
             value={zubereitung}
             onChange={(e) => setZubereitung(e.target.value)}
           />
         </div>
-        <button type="submit">Submit</button>
+        <div className="button-container text-end mt-3">
+    <button className="btn btn-primary" type="submit">Speichern</button>
+  </div>
       </form>
     </div>
   );
