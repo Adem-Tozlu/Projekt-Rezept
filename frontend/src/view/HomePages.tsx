@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 
 
-interface Rezept {
-  _id: string;
-  title: string;
-  zubereitung: string;
-  zutaten: string;
-}
 
 function HomePages() {
   
@@ -111,8 +105,7 @@ function HomePages() {
               <div className="carousel-caption d-none d-md-block ">
                 <h4 className="text-shadow ">Rührei mit Lauchzwiebeln</h4>
                 <p className="text-shadow d-inline  fs-6 d-flex justify-content-center align-items-center">
-                  Wer kennt ihn nicht, den klassischen Hamburger ? Wir verraten
-                  dir unser Rezept!
+                Unser Rührei mit frischen Lauchzwiebeln ist ein Geschmackserlebnis der besonderen Art.
                   <button type="button" className="ms-4 btn btn-success ">
                     zum Rezept
                   </button>
@@ -123,15 +116,14 @@ function HomePages() {
             <div className="carousel-item">
               <div className="position-absolute top-0 start-0 w-100 h-100 gradient-overlay gradient-overlay"></div>
               <img
-                src="./images/rezept3.jpg"
+                src="./images/rezept4.jpg"
                 className="d-block w-100 images-slider"
                 alt="..."
               />
               <div className="carousel-caption d-none d-md-block ">
-                <h4 className="text-shadow ">Hamburger</h4>
+                <h4 className="text-shadow ">Pizza</h4>
                 <p className="text-shadow d-inline  fs-6 d-flex justify-content-center align-items-center">
-                  Wer kennt ihn nicht, den klassischen Hamburger ? Wir verraten
-                  dir unser Rezept!
+                Wer kennt sie nicht, die Königin der Fast-Food-Küche? Unsere Pizza ist ein Klassiker, der immer schmeckt!
                   <button type="button" className="ms-4 btn btn-success ">
                     zum Rezept
                   </button>
@@ -142,15 +134,14 @@ function HomePages() {
             <div className="carousel-item">
               <div className="position-absolute top-0 start-0 w-100 h-100 gradient-overlay gradient-overlay"></div>
               <img
-                src="./images/rezept3.jpg"
+                src="./images/rezept5.jpg"
                 className="d-block w-100 images-slider"
                 alt="Rezept-Bild"
               />
               <div className="carousel-caption d-none d-md-block ">
-                <h4 className="text-shadow ">Hamburger</h4>
+                <h4 className="text-shadow ">Sushi</h4>
                 <p className="text-shadow d-inline  fs-6 d-flex justify-content-center align-items-center">
-                  Wer kennt ihn nicht, den klassischen Hamburger ? Wir verraten
-                  dir unser Rezept!
+                Ein Stück Japan auf deinem Teller: Unser Sushi ist der Inbegriff von Frische und Qualität.
                   <button type="button" className="ms-4 btn btn-success ">
                     zum Rezept
                   </button>
@@ -189,16 +180,18 @@ function HomePages() {
 
         {/*Schnelle Rezepte Kategorie*/}
 
-        <section className="container schnelle_rezepte mt-5 border-top">
+        <section className="container schnelle_rezepte mt-5 border-top " >
           <h5 className="mt-5 mb-3">Schnelle Rezepte</h5>
-          <div className=" row row-cols-1 row-cols-md-3 card-mobile">
+          <div className=" row row-cols-1 row-cols-md-3 card-mobile " >
             <div className="col">
               {/* Card 1 */}
-              <div className="card card-transform rounded-top-4">
+              <div className="card card-transform rounded-top-4"   >
+
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/hummus.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -221,10 +214,11 @@ function HomePages() {
             <div className="col">
               {/* Card 2 */}
               <div className="card card-transform rounded-top-4">
-                <NavLink to="./">
+              <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/spaghetti.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -249,8 +243,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/wrap.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -283,7 +278,7 @@ function HomePages() {
             <div className="row g-0 ">
               <div className="col-md-4">
                 <img
-                  src="./images/rezept2.jpg"
+                  src="./images/apfelstrudel.jpg"
                   className="img-fluid  h-100"
                   alt="Rezept-Bild"
                 />
@@ -316,8 +311,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/kohlrabi.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -342,8 +338,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/hawai.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -368,8 +365,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/couscos.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -402,8 +400,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/Chai.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -428,8 +427,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/rotes.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -454,8 +454,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/latte.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -487,8 +488,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/brokkoli.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -513,8 +515,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/kartoffelsuppe.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>
@@ -539,8 +542,9 @@ function HomePages() {
               <div className="card card-transform rounded-top-4">
                 <NavLink to="./">
                   <img
-                    src="./images/rezept2.jpg"
-                    className="card-img-top rounded-top-4"
+                    src="./images/kartoffelsuppe2.jpg"
+                    className="card-img-top rounded-top-4 img-fluid"
+                    style={{ height: "170px", objectFit: "cover" }}
                     alt="Rezept-Bild"
                   />
                 </NavLink>

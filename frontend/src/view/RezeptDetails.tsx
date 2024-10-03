@@ -7,7 +7,7 @@ interface Rezept {
   title: string;
   zutaten: string;
   zubereitung: string;
-  imagePath?: string;
+  
 }
 
 function RezeptDetails() {
@@ -16,7 +16,8 @@ function RezeptDetails() {
   const [title, setTitle] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
-  const [image, setImage] = useState<File | null>(null);
+  const [kategorie, setKategorie] = useState<string>("");
+  
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function RezeptDetails() {
         setTitle(data.title);
         setZutaten(data.zutaten.join(", "));
         setZubereitung(data.zubereitung);
+        setKategorie(data.kategorie);
         
       } catch (error) {
         console.error("Error:", error);
@@ -51,31 +53,31 @@ function RezeptDetails() {
     e.preventDefault();
     const zutatenArray = zutaten.split(",").map(item => item.trim()).join(" \n");
   
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("zutaten", JSON.stringify(zutatenArray));
-    formData.append("zubereitung", zubereitung);
-    if (image) {
-      formData.append("image", image);
-    }
-  
+    const editRezept = {
+      title,
+      zutaten: zutatenArray,
+      zubereitung,
+      kategorie,
+     
+    };
+
     try {
       const response = await fetch(`${url}/api/rezepte/${id}`, {
         method: "PATCH",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(editRezept),
       });
       await response.json();
       navigate("/");
     } catch (error) {
       console.error("Error updating recipe:", error);
-    }
-  };
+    };}
 
   return (
-    <div className="container">
-      {rezept?.imagePath && (
-        <img src={`http://localhost:5000/${rezept.imagePath}`} alt={rezept.title} style={{ maxWidth: "100%" }} />
-      )}
+    <div className="container ">
+      
       <h1>Titel: {rezept?.title}</h1>
       <p className="">Zutaten:<pre>{rezept?.zutaten}</pre></p>
       
@@ -95,13 +97,27 @@ function RezeptDetails() {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-          />
-          <label>Bild ändern</label>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={(e) => setImage(e.target.files ? e.target.files[0] : null)}/>
+          />  
+
         </div>
+
+        <div className="input-group mb-3">
+          <label className="input-group-text">Kategorie</label>
+          <select
+            className="form-select"
+            id="inputGroupSelect01"
+            value={kategorie}
+            onChange={(e) => setKategorie(e.target.value)}
+          >
+            <option value="">Auswählen...</option>
+            <option value="Frühstück">Frühstück</option>
+            <option value="Mittagessen">Mittagessen</option>
+            <option value="Abendessen">Abendessen</option>
+            <option value="Snack">Snack</option>
+          </select>
+        </div>
+       
+
         <div>
           <label>Zutaten: </label>
           <textarea
@@ -121,7 +137,7 @@ function RezeptDetails() {
         <button type="submit">Speichern</button>
       </form>
     </div>
-  );
-}
+  );}
+
 
 export default RezeptDetails;

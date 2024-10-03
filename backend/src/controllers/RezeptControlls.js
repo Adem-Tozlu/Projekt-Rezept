@@ -1,18 +1,5 @@
 
 import { Rezept } from "../models/Rezeptmodel.js";
-import multer from 'multer';
-import path from 'path';
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage });
 
 export const getRezept = async (req, res) => {
     try {
@@ -28,7 +15,8 @@ export const createRezept = async (req, res) => {
         title: req.body.title,
         zutaten: req.body.zutaten,
         zubereitung: req.body.zubereitung,
-        imagePath: req.file ? req.file.path : null,
+        kategorie: req.body.kategorie,
+      
     };
     const newItem = new Rezept(item);
     try {
@@ -64,16 +52,8 @@ export const deleteRezept = async (req, res) => {
 export const updateRezept = async (req, res) => {
     const { id } = req.params;
     const { title, zutaten, zubereitung } = req.body;
-    const updateData = {
-        title,
-        zutaten,
-        zubereitung,
-    };
-    if (req.file) {
-        updateData.imagePath = req.file.path;
-    }
     try {
-        const updatedRezept = await Rezept.findByIdAndUpdate(id, updateData, { new: true });
+        const updatedRezept = await Rezept.findByIdAndUpdate(id, { title, zutaten, zubereitung }, { new: true });
         res.json(updatedRezept);
     }
     catch (error) {
@@ -81,4 +61,3 @@ export const updateRezept = async (req, res) => {
     }
 }
 
-export const uploadMiddleware = upload.single('image');

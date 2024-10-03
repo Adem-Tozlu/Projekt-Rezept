@@ -13,9 +13,9 @@ const rezeptSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imagePath: {
+    kategorie: {
         type: String,
-        required: false
+        required: true
     },
     date: {
         type: Date,
