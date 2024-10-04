@@ -1,23 +1,18 @@
-import {useEffect,useState} from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
-
 
 interface Rezept {
   title: string;
   zutaten: string;
   zubereitung: string;
-  
 }
 
 function RezeptDetails() {
-
-   const [rezept, setRezept] = useState<Rezept | null>(null);
+  const [rezept, setRezept] = useState<Rezept | null>(null);
   const [title, setTitle] = useState<string>("");
   const [zutaten, setZutaten] = useState<string>("");
   const [zubereitung, setZubereitung] = useState<string>("");
   const [kategorie, setKategorie] = useState<string>("");
-  
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -33,7 +28,6 @@ function RezeptDetails() {
         setZutaten(data.zutaten.join(", "));
         setZubereitung(data.zubereitung);
         setKategorie(data.kategorie);
-        
       } catch (error) {
         console.error("Error:", error);
       }
@@ -51,14 +45,16 @@ function RezeptDetails() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const zutatenArray = zutaten.split(",").map(item => item.trim()).join(" \n");
-  
+    const zutatenArray = zutaten
+      .split(",")
+      .map((item) => item.trim())
+      .join(" \n");
+
     const editRezept = {
       title,
       zutaten: zutatenArray,
       zubereitung,
       kategorie,
-     
     };
 
     try {
@@ -73,38 +69,43 @@ function RezeptDetails() {
       navigate("/");
     } catch (error) {
       console.error("Error updating recipe:", error);
-    };}
+    }
+  };
 
   return (
-    <div className="container ">
-      
-      <h1>Titel: {rezept?.title}</h1>
-      <p className="">Zutaten:<pre>{rezept?.zutaten}</pre></p>
-      
-      <p>Zubereitung: {rezept?.zubereitung}</p>
+    <div className="container card mt-5 bg-success p-5 ">
+      <h1>{rezept?.title}</h1>
+      <p className="fw-lighter fs-7">{kategorie}</p>
+      <h5 className="">
+        Zutaten:
+      </h5><pre className="fw-normal">{rezept?.zutaten}</pre>
 
-      <p>
+      <h5 className="">Zubereitung:</h5>
+      <p>{rezept?.zubereitung}</p>
+
+      <p className="fs-7">
         <em>Datum: {new Date().toLocaleDateString()}</em>
       </p>
-      <button onClick={handleDelete} style={{ background: "red" }}>
+      <button onClick={handleDelete} className="bg-danger w-25">
         Lösche das Rezept
       </button>
       <h2>Rezept bearbeiten</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Titel: </label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />  
-
-        </div>
+      <form onSubmit={handleSubmit} className="form-group">
+      <div className="mb-3">
+    <label htmlFor="title" className="form-label">Titel: </label>
+    <input
+      type="text"
+      className="form-control"
+      id="title"
+      value={title}
+      onChange={(e) => setTitle(e.target.value)}
+    />
+  </div>
 
         <div className="input-group mb-3">
           <label className="input-group-text">Kategorie</label>
           <select
-            className="form-select"
+            className=""
             id="inputGroupSelect01"
             value={kategorie}
             onChange={(e) => setKategorie(e.target.value)}
@@ -116,12 +117,10 @@ function RezeptDetails() {
             <option value="Snack">Snack</option>
           </select>
         </div>
-       
 
         <div>
           <label>Zutaten: </label>
           <textarea
-            
             value={zutaten}
             onChange={(e) => setZutaten(e.target.value)}
           />
@@ -129,7 +128,6 @@ function RezeptDetails() {
         <div>
           <label>Zubereitung: </label>
           <textarea
-            
             value={zubereitung}
             onChange={(e) => setZubereitung(e.target.value)}
           />
@@ -137,7 +135,7 @@ function RezeptDetails() {
         <button type="submit">Speichern</button>
       </form>
     </div>
-  );}
-
+  );
+}
 
 export default RezeptDetails;
