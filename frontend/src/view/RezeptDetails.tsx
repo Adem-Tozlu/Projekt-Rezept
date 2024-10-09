@@ -73,42 +73,50 @@ function RezeptDetails() {
   };
 
   return (
-    <div className="container card mt-5 bg-success p-5 ">
-      <h1>{rezept?.title}</h1>
-      <p className="fw-lighter fs-7">{kategorie}</p>
-      <h5 className="">
+    
+    <div className="container  ">
+<div className="p-4 rounded mt-5" style={{ border: '1px solid rgba(40, 167, 69, 0.2)' }}>     <div > <h1 >Rezept für {rezept?.title} </h1>
+     <p className="fw-lighter fs-6">{kategorie}</p></div>
+     <div className=" "><h5 className="">
         Zutaten:
-      </h5><pre className="fw-normal">{rezept?.zutaten}</pre>
-
+      </h5>  <pre className="lh-sm py-1">
+        {rezept?.zutaten}
+          </pre>
+</div> 
       <h5 className="">Zubereitung:</h5>
       <p>{rezept?.zubereitung}</p>
 
       <p className="fs-7">
         <em>Datum: {new Date().toLocaleDateString()}</em>
       </p>
-      <button onClick={handleDelete} className="bg-danger w-25">
+      <button onClick={handleDelete} className="bg-success rounded border-0 p-1 px-2 ">
         Lösche das Rezept
       </button>
+      <hr className="border-success"/>
       <h2>Rezept bearbeiten</h2>
       <form onSubmit={handleSubmit} className="form-group">
       <div className="mb-3">
-    <label htmlFor="title" className="form-label">Titel: </label>
+   
     <input
       type="text"
-      className="form-control"
+      className=" form-control "
       id="title"
-      value={title}
+      placeholder="Titel"
+      //value={title}
       onChange={(e) => setTitle(e.target.value)}
+      style={{ borderColor: 'rgba(40, 167, 69, 0.2)' }}
     />
   </div>
 
         <div className="input-group mb-3">
           <label className="input-group-text">Kategorie</label>
           <select
-            className=""
-            id="inputGroupSelect01"
+            className="form-select" 
+            id="inputGroupSelect01 "
             value={kategorie}
+            
             onChange={(e) => setKategorie(e.target.value)}
+            style={{ borderColor: 'rgba(40, 167, 69, 0.2)' }}
           >
             <option value="">Auswählen...</option>
             <option value="Frühstück">Frühstück</option>
@@ -119,22 +127,26 @@ function RezeptDetails() {
         </div>
 
         <div>
-          <label>Zutaten: </label>
+          
           <textarea
-            value={zutaten}
+            placeholder="Zutaten"
+            className="form-control"
             onChange={(e) => setZutaten(e.target.value)}
+            style={{ borderColor: 'rgba(40, 167, 69, 0.2)' }}
           />
         </div>
         <div>
-          <label>Zubereitung: </label>
+          
           <textarea
-            value={zubereitung}
+            placeholder="Zubereitung"
+            className="form-control my-3"
             onChange={(e) => setZubereitung(e.target.value)}
+            style={{ borderColor: 'rgba(40, 167, 69, 0.2)' }}
           />
         </div>
-        <button type="submit">Speichern</button>
+        <button className="bg-success rounded border-0 p-1 px-2" type="submit">Speichern</button>
       </form>
-    </div>
+    </div></div>
   );
 }
 

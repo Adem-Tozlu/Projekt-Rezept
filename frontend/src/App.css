@@ -54,3 +54,7 @@
 .fs-7 {
   font-size: 0.75rem; /* Beispiel: 0.75rem für eine kleinere Textgröße */
 }
+
+.border-light-success {
+  border-color: rgba(40, 167, 69, 0.2) !important; /* Leichtes Grün */
+}
